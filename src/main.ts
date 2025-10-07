@@ -2,6 +2,7 @@ import { writeFile as Writeable, existsSync, mkdir } from "fs";
 import { move } from "fs-extra";
 import type { UserFileName } from "../types/FileNameTypes.js";
 import { File } from "../main.js";
+import CreateGitignore from "../Created/Created.js";
 
 const nameSrc = "src" as UserFileName | string;
 const nameJS = "js" as UserFileName | unknown;
@@ -34,6 +35,10 @@ function GetDir(name: UserFileName | any) {
 GetDir(nameSrc);
 GetDir(nameJS);
 GetDir(nameCSS);
+
+if (existsSync(".gitignore")) {
+  CreateGitignore(".gitignore");
+}
 
 if (existsSync("main.html")) {
   const htmlMoveFile = `src/${htmlFileCreated.fileName("main.html")}`;
